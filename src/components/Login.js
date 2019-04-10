@@ -34,37 +34,32 @@ class Login extends Component{
     }
 
     handleFormChange = (event)=>{
-        if(event.target.name==="password"){
         this.setState({[event.target.name]:event.target.value})
-
-        }
-        else{
-            this.setState({[event.target.name]:event.target.value})
-        }
     }
     handleLoginSubmit = (event)=>{
+      event.preventDefault();
       console.log("Event");
       if (event.target.checkValidity() === false) {
         event.stopPropagation();
+        this.setState({validated:true});
       }
-      this.setState({validated:true});
-      event.preventDefault();
+      else{
+        apiCaller("POST",3838,{},'login',{username:this.state.username, p256:sha256(this.state.password)}).then(data=>{
+          console.log(data);
+            if(data.status===true){
+              window.jwt = data.message.jwt;
+              this.props.loginSuccess();
+              history.push('/dashboard');
+            }
+            else{
+              alert(data.message);
+            }            
+        }).catch(e=>{
+              console.log(e);
+              alert('Full Error. Fetch fail. Check if the server is Running');
 
-      apiCaller("POST",3838,{},'login',{username:this.state.username, p256:this.state.password}).then(data=>{
-        console.log(data);
-          if(data.status===true){
-            window.jwt = data.message.jwt;
-            this.props.loginSuccess();
-            history.push('/dashboard');
-          }
-          else{
-            alert(data.message);
-          }            
-      }).catch(e=>{
-            console.log(e);
-            alert('Full Error. Fetch fail. Check if the server is Running');
-
-        })
+          })
+      }
     }
 
     render(){

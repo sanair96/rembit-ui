@@ -31,24 +31,28 @@ class SignUp extends Component{
       event.preventDefault();
       if (event.target.checkValidity() === false) {
         event.stopPropagation();
-      }
-      this.setState({validated:true})
-      if(this.state.password===this.state.confirm_password){
-      apiCaller("POST",3838,{},"signup",{username:this.state.username, email:this.state.email, p256:this.state.p256,})
+        this.setState({validated:true})
       }
       else{
-        this.setState({err_message:"Passwords do not match"});
-        this.setState({password:"", confirm_password:""});
+        if(this.state.password===this.state.confirm_password){
+          apiCaller("POST",3838,{},"register",{
+            username:this.state.username, email:this.state.email,
+            p256:sha256(this.state.password)}).then(data=>{
+              alert(data.body.message);
+            }).catch(e=>{
+              console.log(e);
+              alert(e.message)
+            })
+          }
+          else{
+            this.setState({err_message:"Passwords do not match"});
+            this.setState({password:"", confirm_password:""});
+          }
       }
     }
 
     handleFormChange = (event)=>{
-      if(event.target.name==="password"||event.target.name==="confirm_password"){
-        this.setState({[event.target.name]:event.target.value})
-      }
-      else{
-        this.setState({[event.target.name]:event.target.value})
-      }
+      this.setState({[event.target.name]:event.target.value});
     }
     render(){
       const { classes } = this.props;
