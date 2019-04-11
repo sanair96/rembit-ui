@@ -35,9 +35,7 @@ class SignUp extends Component{
       }
       else{
         if(this.state.password===this.state.confirm_password){
-          apiCaller("POST",3838,{},"register",{
-            username:this.state.username, email:this.state.email,
-            p256:sha256(this.state.password)}).then(response=>{
+          apiCaller("POST",3838,{},"register",`username=${this.state.username}&email=${this.state.email}&p256:${sha256(this.state.password)}`).then(response=>{
               return response.json();
             }).then(data=>{
               alert(data.message);
@@ -61,7 +59,7 @@ class SignUp extends Component{
 
       return (
         <div>
-          <Container >
+          <Container style={{"marginTop":"10px","marginBottom":"10px"}}>
             <Row>
               <Col xs={6}>
                 <Form noValidate validated={this.state.validated} onSubmit={(event)=>{this.handleSubmit(event)}}>

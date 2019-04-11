@@ -67,7 +67,7 @@ class Login extends Component{
     render(){
         return (
             <>
-              <Container style={{"textAlign":"center"}}>
+              <Container style={{"marginTop":"10px","marginBottom":"10px"}} style={{"textAlign":"center"}}>
                 <Row>
                   <Col></Col>
                   <Col xs={6}>
@@ -83,7 +83,7 @@ class Login extends Component{
                         8chars, 1 Capital, 1 Small, 1 Special, 1 Number
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Button variant="primary" type="submit  ">
+                    <Button variant="primary" type="submit">
                     Submit
                     </Button>
                   </Form>

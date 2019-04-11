@@ -22,7 +22,7 @@ class Forgotpassword extends Component{
       this.setState({validated:true})
     }
     else{
-      apiCaller("GET",3838,{},'reset_password',{email:this.state.email,p256:sha256(this.state.password)}).then(response=>{
+      apiCaller("GET",3838,{},'reset_password',`email:${this.state.email}&p256:${sha256(this.state.password)}`).then(response=>{
         return response.json();
       }).then(data=>{
         console.log(data.message);
@@ -36,7 +36,7 @@ class Forgotpassword extends Component{
     render(){
         return (
             <>
-            <Container>
+            <Container style={{"marginTop":"10px","marginBottom":"10px"}}>
               <Row>
               <Col></Col>
               <Col xs={6}>              
