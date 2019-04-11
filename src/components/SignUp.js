@@ -37,8 +37,10 @@ class SignUp extends Component{
         if(this.state.password===this.state.confirm_password){
           apiCaller("POST",3838,{},"register",{
             username:this.state.username, email:this.state.email,
-            p256:sha256(this.state.password)}).then(data=>{
-              alert(data.body.message);
+            p256:sha256(this.state.password)}).then(response=>{
+              return response.json();
+            }).then(data=>{
+              alert(data.message);
             }).catch(e=>{
               console.log(e);
               alert(e.message)

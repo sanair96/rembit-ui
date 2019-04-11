@@ -44,8 +44,10 @@ class Login extends Component{
         this.setState({validated:true});
       }
       else{
-        apiCaller("POST",3838,{},'login',{username:this.state.username, p256:sha256(this.state.password)}).then(data=>{
-          console.log(data);
+        apiCaller("POST",3838,{},'login',`username=${this.state.username}&p256=${sha256(this.state.password)}`).then(response=>{
+          return response.json()
+        }).then(data=>{
+          
             if(data.status===true){
               window.jwt = data.message.jwt;
               this.props.loginSuccess();

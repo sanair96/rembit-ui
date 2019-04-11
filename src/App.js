@@ -22,7 +22,7 @@ class App extends Component{
                             <Route exact strict path='/login' component={()=><Login/>} />
                             <Route exact strict path='/signup' component={()=><SignUp/>} />
                             <Route exact strict path='/dashboard' component={()=><Dashboard/>} />
-                            <Route exact strict path='/logout' component={()=><Redirect to="/login"/>}/>
+                            <Route exact strict path='/logout' component={()=>{window.jwt=undefined;return <Redirect to="/login"/>}}/>
                             <Route exact strict path='/forgotpassword' component={()=><ForgotPassword/>}/>
                         </Switch>
                 </Router>
