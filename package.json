@@ -30,6 +30,6 @@
     "@babel/core": "^7.4.3",
     "babel": "^6.23.0",
     "live-server": "^1.2.1",
-    "parcel": "^1.12.3"
+    "parcel": "^2.8.2"
   }
 }
